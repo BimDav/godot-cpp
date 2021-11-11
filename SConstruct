@@ -230,10 +230,10 @@ elif env['platform'] == 'osx':
 
     if env["macos_arch"] == "universal":
         env.Append(LINKFLAGS=["-arch", "x86_64", "-arch", "arm64"])
-        env.Append(CCFLAGS=["-arch", "x86_64", "-arch", "arm64"])
+        env.Append(CCFLAGS=['-fPIC', "-arch", "x86_64", "-arch", "arm64"])
     else:
         env.Append(LINKFLAGS=["-arch", env["macos_arch"]])
-        env.Append(CCFLAGS=["-arch", env["macos_arch"]])
+        env.Append(CCFLAGS=['-fPIC', "-arch", env["macos_arch"]])
 
     env.Append(CCFLAGS=['-std=c++14'])
 
