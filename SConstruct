@@ -221,7 +221,9 @@ if env['platform'] == 'linux' or env['platform'] == 'freebsd':
 
 elif env['platform'] == 'osx':
     # Use Clang on macOS by default
-    env['CXX'] = 'clang++'
+    env['CXX'] = '/usr/local/osxcross/bin/o64-clang++'
+    env['AR'] = '/usr/local/osxcross/bin/x86_64-apple-darwin20.4-ar'
+    env['RANLIB'] = '/usr/local/osxcross/bin/x86_64-apple-darwin20.4-ranlib'
 
     if env['bits'] == '32':
         raise ValueError(
@@ -230,10 +232,10 @@ elif env['platform'] == 'osx':
 
     if env["macos_arch"] == "universal":
         env.Append(LINKFLAGS=["-arch", "x86_64", "-arch", "arm64"])
-        env.Append(CCFLAGS=['-fPIC', "-arch", "x86_64", "-arch", "arm64"])
+        env.Append(CCFLAGS=["-arch", "x86_64", "-arch", "arm64"])
     else:
         env.Append(LINKFLAGS=["-arch", env["macos_arch"]])
-        env.Append(CCFLAGS=['-fPIC', "-arch", env["macos_arch"]])
+        env.Append(CCFLAGS=["-arch", env["macos_arch"]])
 
     env.Append(CCFLAGS=['-std=c++14'])
 
